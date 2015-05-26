@@ -184,7 +184,7 @@ $databases = array (
     array (
       'database' => 'fabfems',
       'username' => 'root',
-      'password' => 'SuperPass0',
+      'password' => 'root',
       'host' => 'localhost',
       'port' => '',
       'driver' => 'mysql',
