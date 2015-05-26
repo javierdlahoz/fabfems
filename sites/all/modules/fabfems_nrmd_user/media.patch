@@ -1,0 +1,47 @@
+--- media.media.inc	2012-12-04 15:50:24.000000000 -0800
++++ media.media.inc	2012-12-04 15:44:16.000000000 -0800
+@@ -56,7 +56,7 @@ function media_media_browser_plugin_view
+       module_load_include('inc', 'media', 'includes/media.pages');
+       $upload_form = drupal_get_form($upload_form_id, $params);
+       return array(
+-        '#title' => media_variable_get('browser_tab_label_upload', 'Upload'),
++        '#title' => t('Upload'),
+         'form' => array($upload_form),
+         '#attached' => $attached,
+       );
+--- modules/media_internet/media_internet.media.inc     2012-12-04 15:50:29.000000000 -0800
++++ modules/media_internet/media_internet.media.inc        2012-12-04 15:44:22.000000000 -0800
+@@ -35,7 +35,7 @@ function media_internet_media_browser_pl
+       // @todo: implement the multiselect argument here.
+       $from_web_form = drupal_get_form('media_internet_add',  $types, $multiselect);
+       return array(
+-        '#title' => media_variable_get('browser_tab_label_web', 'Web'),
++        '#title' => t('Web'),
+         'form' => array($from_web_form),
+         '#attached' => array(
+           //'js' => array($path . '/js/plugins/media.fromurl.js'),
+--- includes/media.admin.inc    2012-12-04 15:48:52.000000000 -0800
++++ includes/media.admin.inc       2012-12-04 15:46:46.000000000 -0800
+@@ -587,22 +587,6 @@ function media_admin_config_browser($for
+     '#description' => t('File extensions which are accepted in the media browser.  Use spaces to separate (e.g. "jpg gif pdf doc"). <br/><em>Note that this can be overriden on a per-field basis when creating multimedia asset fields and files of certain extensions cannot be embedded at this time.</em>'),
+     '#maxlength' => 255,
+   );
+-
+-  $form[media_variable_name('browser_tab_label_upload')] = array(
+-    '#type' => 'textfield',
+-    '#title' => t('"Upload" tab label'),
+-    '#default_value' => media_variable_get('browser_tab_label_upload'),
+-    '#description' => t('Label for the "Upload" tab of the media browser.'),
+-    '#maxlength' => 255,
+-  );
+-
+-  $form[media_variable_name('browser_tab_label_web')] = array(
+-    '#type' => 'textfield',
+-    '#title' => t('"Web" tab label'),
+-    '#default_value' => media_variable_get('browser_tab_label_web'),
+-    '#description' => t('Label for the "Web" tab of the media browser.'),
+-    '#maxlength' => 255,
+-  );
+
+   $form['#submit'][] = 'media_admin_config_browser_pre_submit';
+   return system_settings_form($form);

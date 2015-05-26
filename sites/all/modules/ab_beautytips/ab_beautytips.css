@@ -1,0 +1,14 @@
+.form-item .ab-beautytips-trigger {
+  background: url("images/question-dark.png") no-repeat center center transparent;
+  display: inline-block;
+  height: 12px;
+  margin-left: 10px;
+  overflow: hidden;
+  position: relative;
+  text-indent: -9999px;
+  width: 12px;
+}
+
+.form-item .ab-beautytips-trigger:hover {
+  cursor: pointer;
+}

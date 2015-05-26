@@ -1,0 +1,28 @@
+/* 
+ * css3pie fixes 
+ */
+
+
+
+
+#block-nodeblock-5 img,
+#page-wrapper,
+#block-nodeblock-23 ul li,
+#block-nodeblock-17 .field-name-body img,
+#block-views-partners-block .view-header img {
+  -pie-png-fix: true;
+  behavior: url(/sites/all/libraries/PIE/PIE.htc);
+}
+
+
+#block-system-user-menu ul.menu li a,
+#views_slideshow_cycle_teaser_section_slideshow-block_1 .views-field-php a,
+input[type="submit"],
+form .form-text,
+form .form-textarea,
+#block-fabfems-nrmd-user-user-sidebar .content .item-list a,
+#webform-client-form-18 .webform-component .form-checkboxes {
+	position: relative;
+	z-index: 0;
+	behavior: url(/sites/all/libraries/PIE/PIE.htc);
+}

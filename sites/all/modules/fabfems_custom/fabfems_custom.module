@@ -1,0 +1,126 @@
+<?php
+
+/**
+ * @file
+ * Functions for the fabfems module.
+ */
+
+/**
+ * Implementation of hook_form_alter
+ */
+function fabfems_custom_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  
+  switch ($form_id) {
+    
+    case 'webform_client_form_18':
+      //$form['#validate'][] = 'fabfems_custom_user_register_webform_validate';
+      
+      if(!empty($form['submitted']['stem_experience']) && !empty($form['submitted']['stem_experience']['#description']) ) {
+        // set title equal to the description
+        $form['submitted']['stem_experience']['#title'] = $form['submitted']['stem_experience']['#description'];
+        // do not display the desription
+        unset($form['submitted']['stem_experience']['#description']);
+      }
+      $account = user_load($user->uid);
+      if (!empty($form['submitted']['profile_image'])) {
+        if (!empty($account->field_image['und'][0]['uri'])) {
+          $form['submitted']['profile_image']['existing_image'] = array(
+            '#theme' => 'link',
+            '#path' => file_create_url($account->field_image['und'][0]['uri']),
+            '#text' => theme('image_style', array('path' => $account->field_image['und'][0]['uri'], 'style_name' => 'user_listing')),
+            '#options' => array(
+              'attributes' => array(
+                'class' => 'colorbox',
+              ),
+              'html' => TRUE,
+            ),
+            '#weight' => -1000,
+          );
+        }
+        else {
+          $form['submitted']['profile_image']['#required'] = FALSE;
+          $form['submitted']['profile_image']['profile_image']['#webform_component']['mandatory'] = 0;
+        }
+      }
+      
+      $form['#submit'][] = 'fabfems_custom_user_register_webform_submit';
+      break;
+      
+    case 'views_exposed_form':
+    
+      if ($form['#id'] == 'views-exposed-form-mentors-page' || 
+          $form['#id'] == 'views-exposed-form-mentors-page-1' || 
+          $form['#id'] == 'views-exposed-form-manage-role-models-page') {
+          
+        if ($form['#id'] == 'views-exposed-form-mentors-page' || $form['#id'] == 'views-exposed-form-mentors-page-1') { 
+        
+          // Add custom keyword search to the Find a Role Model view (inherited from kwall)
+          $search = empty($_GET['search']) ? '' : $_GET['search'];
+          $form['search'] = array(
+            '#type' => 'textfield',
+            '#size' => 30,
+            '#default_value' => $search,
+            '#weight' => -500,
+          );
+          $search_info['filter-search']['label'] = 'Keyword';
+          $search_info['filter-search']['value'] = 'search';
+          $form['#info'] = $search_info + $form['#info'];
+          
+          // apply search filter to fields
+          $fields = array(
+            'field_first_name_value',
+            'field_last_name_value',
+            'field_company_value',
+            'field_university_value',
+            'field_degree_value',
+            'field_job_title_value',
+            'field_biography_value',
+						'field_affiliation_other_value',
+						'field_interests_other_value',
+						'field_participation_level_other_value',
+						'field_additional_resources_other_value',
+          );
+          foreach ($fields as $field) {
+            $form[$field]['#type'] = 'hidden';
+            $form['#info']['filter-' . $field]['label'] = '';
+            $form[$field]['#value'] = $search;
+          }
+          
+          // re-write submit
+          $form['submit']['#value'] = "Search";
+        }
+      }
+      break;
+  }
+}
+
+
+
+/**
+ * Build output for find view
+ */
+function fabfems_custom_find_view_user($data) {
+  $output = '<h2>' . l($data->field_field_first_name[0]['rendered']['#markup'] . ' ' . $data->field_field_last_name[0]['rendered']['#markup'], 'user/' . $data->uid) . '</h2>';
+
+  if (!empty($data->field_field_address[0]['rendered']['#address']['locality'])) {
+    $city = $data->field_field_address[0]['rendered']['#address']['locality'];
+  }
+  if (!empty($data->field_field_address[0]['rendered']['#address']['administrative_area'])) {
+    $state = ', '.$data->field_field_address[0]['rendered']['#address']['administrative_area'];
+  }
+  if (!empty($data->field_field_address[0]['rendered']['#address']['country'])) {
+    $country = ', '.$data->field_field_address[0]['rendered']['#address']['country'];
+  }
+  if (!empty($data->field_field_address[0]['rendered']['locality_block']['administrative_area']['#options'])) {
+    $options = $data->field_field_address[0]['rendered']['locality_block']['administrative_area']['#options'];
+  }
+  
+  if (!empty($city) && !empty($state)) {
+    $state = (!empty($options[$state])) ? $options[$state] : $state;
+  }
+	
+  $output .= $city . $state . $country;
+  
+  return $output;
+}

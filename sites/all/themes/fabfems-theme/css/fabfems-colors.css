@@ -1,0 +1,132 @@
+/*
+ * Generic
+ */
+a.read-more,
+a.read-more:link,
+a.read-more:visited {
+  color: #D50D64;
+}
+#cboxOverlay {
+  background: #9776A4;
+}
+
+/*
+ * User profile
+ */
+.profile .field-label-above {
+  border-top-color: rgba(186, 171, 195, 0.5);
+}
+.profile .field-label-above .field-label {
+  color: #9776A4;
+}
+.profile .field-name-field-address {
+  color: #2F2F2F;
+}
+.profile .field-name-field-image img {
+  background-color: #FFF;
+  border-color: #826D8F;
+}
+.page-user #page-title {
+  color: #905BBD;
+}
+
+/*
+ * Find a Role Model view
+ */
+div#block-fabfems-nrmd-user-role-models-view-admin-link a.admin-link {
+  background-color: #D9EDCF;
+  border-color: #AFC1A8;
+  color: #444;
+}
+div#block-fabfems-nrmd-user-role-models-view-admin-link a.admin-link:hover {
+  background-color: #E0FFE0;
+}
+
+/*
+ * Partners view
+ */
+.views-page-partners .views-field-field-image a {
+  background-color: #FFF;
+  border-color: #826D8F;
+}
+
+/*
+ * Partner node
+ */
+.node-partner .field-name-field-image img {
+  background-color: #FFF;
+  border-color: #826D8F;
+}
+
+/*
+ * User sidebar view block
+ */
+#block-fabfems-nrmd-user-user-sidebar .content img {
+  background-color: #FFF;
+  border-color: #826D8F;
+}
+#block-fabfems-nrmd-user-user-sidebar .content .item-list a {
+  background-color: #D9EDCF;
+  border-color: #AFC1A8;
+  color: #444;
+}
+#block-fabfems-nrmd-user-user-sidebar .content .item-list a:hover {
+  background-color: #E0FFE0;
+}
+#block-fabfems-nrmd-user-user-sidebar .multimedia-gallery-wrap a {
+  border-color: #AFC1A8;
+}
+
+/*
+ * Section headers
+ */
+#node-22 .field-item h2,
+#block-fabfems-nrmd-user-user-registration-steps h2 {
+  background-color: #BBACC4;
+  color: #FFF;
+}
+#block-fabfems-nrmd-user-user-registration-steps ul li.step {
+  color: #FFF;
+}
+#block-fabfems-nrmd-user-user-registration-steps ul li.current-step {
+  color: #905BBD;
+}
+
+/*
+ * Overrides
+ */
+
+/* Main menu */
+.page-user .contact-form #edit-to a {
+  color: #333;
+  text-shadow-color: #FFF;
+}
+
+/* 
+ * User/profile edit forms
+ */
+
+/* Profile form: Name, Year of Birth, Address */
+div#edit-field-dob fieldset legend,
+div#edit-field-address fieldset legend { 
+  color:#905BBD;
+}
+div#edit-field-address fieldset div.fieldset-wrapper div.form-item label {
+  color: #000;
+}
+
+/* Profile form: Labels on taxo fields */
+.form-type-checkboxes label { 
+  color:#905BBD;
+}
+.form-type-radio label.option,
+.form-type-checkboxes label.option { 
+  color:#000;
+}
+
+/* "Submit" and "cancel account" buttons on user profile forms */
+#edit-save-as-draft,
+#edit-cancel {
+  background-color: #EAE0EF !important;
+  border-color: #C5B5CF !important;
+}

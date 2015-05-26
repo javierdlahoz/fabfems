@@ -1,0 +1,174 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the fabfems module.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function fabfems_custom_install() {
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function fabfems_custom_uninstall() {
+}
+
+/**
+ * Clear out settings for field_permissions module.  Install some other modules.
+ */
+function fabfems_custom_update_7001() {
+  module_disable(array('field_permissions'));
+  drupal_uninstall_modules(array('field_permissions', 'overlay'));
+  
+  module_enable(array(
+    'field_permissions', 'user_revision', // Ingredients for user profile approval workflow
+    'features', 'strongarm', 'fabfems_nrmd_user', // Features stuff
+    'diff', 'update', // For development use only
+  ));
+  
+  // Weight fabfems_nrmd_user so it will execute after user_revision module
+  db_update('system')->fields(array('weight' => 97))->condition('name', 'user_revision', '=')->execute();
+  db_update('system')->fields(array('weight' => 99))->condition('name', 'fabfems_nrmd_user', '=')->execute();
+  db_update('system')->fields(array('weight' => 98))->condition('name', 'profile_tabs', '=')->execute();
+}
+
+/**
+ * Turn on some useful devel stuff, and refactor some custom code into the fabfems_nrmd_user feature.
+ */
+function fabfems_custom_update_7002() {
+  variable_set('devel_debug_mail_directory', '/Applications/MAMP/logs/devel_mail');
+}
+
+/**
+ * Make the "Become a Role Model" links in the slides point to /user/register, and make
+ * changes to registration and profile blocks.
+ */
+function fabfems_custom_update_7003() {
+  // Update all the 'registration' path aliases to point to /user/register.
+  db_update('url_alias')
+    ->fields(array(
+      'source' => 'user/register',
+    ))
+    ->condition('alias', 'registration')
+    ->execute();
+
+  // Do not show the header "Role Model Profile" on the user login form.
+  db_update('block')
+    ->fields(array(
+      'pages' => 'users/*
+user/*/gallery
+user/*/content',
+    ))
+    ->condition('delta', 22)
+    ->condition('module', 'nodeblock')
+  ->execute();
+  
+  // Turn off the "Registration Steps" nodeblock. We're replacing it with a custom code version.
+  db_update('block')
+    ->fields(array(
+      'status' => 0,
+    ))
+    ->condition('delta', 23)
+    ->condition('module', 'nodeblock')
+  ->execute();
+  
+  // Turn on the new "Registration Steps" custom block in both themes.
+  db_update('block')
+    ->fields(array(
+      'status' => '1',
+      'region' => 'navigation'
+    ))
+    ->condition('delta', 'user_registration_steps')
+    ->condition('module', 'fabfems_custom')
+    ->condition('theme', 'seven', '<>') // The 'navigation' region does not exist in the "seven" theme.
+  ->execute();
+}
+
+/**
+ * Override some strings to produce custom user messages.
+ */
+function fabfems_custom_update_7005() {
+  $custom_strings = array(
+    '' => array( //context is blank
+      'You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password.' => '',
+      'You have successfully validated your e-mail address.' => '', //blanking the string hides it
+    )
+  );
+
+  variable_set("locale_custom_strings_en", $custom_strings);
+}
+
+/**
+ * Migrate the old gallery images into the new media gallery.
+ */
+function fabfems_custom_update_7006() {
+  // Get a list of all the users who have old gallery images.
+  $query = db_select('field_data_field_gallery_images', 'g');
+  $query->distinct();
+  $query->fields('g',array('entity_id'));
+  $result = $query->execute();
+
+  // Loop through the users.
+  while($record = $result->fetchAssoc()) {
+    $account = user_load($record['entity_id']);
+    // Get the contents of the old and new gallery fields. 
+    $old_gallery = $account->field_gallery_images['und'];
+    $new_gallery = $account->field_multimedia_gallery['und'];
+    // Set "display" attribute - multimedia field requires it
+    foreach ($old_gallery as $k => $image) {
+      $old_gallery[$k]['display'] = 1;
+    }
+    // Merge the gallery content, with the old content at the beginning of the array.
+    if ($new_gallery) {
+      $merged_gallery = array_merge($old_gallery, $new_gallery);
+      $account->field_multimedia_gallery['und'] = $merged_gallery;
+    } else {
+      $account->field_multimedia_gallery = array('und' => $old_gallery);
+    }
+    // Push the merged gallery into the multimedia field.
+    user_save($account); 
+  }
+}
+
+/**
+ * Set a variable for the HUD profile-completion reminder message.
+ */
+function fabfems_custom_update_7007() {
+  variable_set("fabfems_nrmd_hud_message", "Reminder: if you're interested in becoming a role model, you must
+      <a href='@edit-profile'>complete your profile</a> and submit it for moderation.");
+}
+
+/**
+ * Grant the "Approved" status to all users who currently have the "Role Model" role.
+ */
+function fabfems_custom_update_7008() {
+  // Get a list of all the users who have the Role Model role.
+  $query = db_select('users', 'u');
+  $query->join('users_roles', 'ur', 'u.uid = ur.uid');
+  $query->groupBy('u.uid');
+  $query->condition('ur.rid', 4);
+  $query->fields('u',array('uid'));
+  $result = $query->execute();
+  
+  // Loop through the users.
+  while($record = $result->fetchAssoc()) {
+    $account = user_load($record['uid']);
+    if ($account->field_role_model_status['und'][0]['value'] != 'Approved') {
+      // Push the Approved value into the Status field.
+      $account->field_role_model_status['und'][0]['value'] = 'Approved';
+      user_save($account);
+    }
+  }
+
+  // Update the custom blocks that were moved from fabfems_custom module into fabfems_nrmd_user.
+  db_update('block')
+    ->fields(array(
+      'module' => 'fabfems_nrmd_user'
+    ))
+    ->condition('module', 'fabfems_custom')
+  ->execute();
+}

@@ -1,0 +1,10 @@
+name = FabFems Custom Module
+description = FabFems Custom Module
+package = "Other"
+core = 7.x
+
+files[] = fabfems_custom.module
+files[] = fabfems_custom.install
+
+version = "7.x-1.0"
+project = "fabfems_custom"

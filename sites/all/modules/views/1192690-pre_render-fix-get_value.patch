@@ -1,0 +1,32 @@
+diff --git a/handlers/views_handler_field_prerender_list.inc b/handlers/views_handler_field_prerender_list.inc
+index b6ec3f3..98ac30f 100644
+--- a/handlers/views_handler_field_prerender_list.inc
++++ b/handlers/views_handler_field_prerender_list.inc
+@@ -114,8 +114,13 @@ class views_handler_field_prerender_list extends views_handler_field {
+    *   An object containing all retrieved values.
+    * @param $field
+    *   Optional name of the field where the value is stored.
++   * @param $raw
++   *   Use the raw data and not the data defined in pre_render
+    */
+-  function get_value($values, $field = NULL) {
++  function get_value($values, $field = NULL, $raw = FALSE) {
++    if ($raw) {
++      return parent::get_value($values, $field);
++    }
+     $item = $this->get_items($values);
+     $item = (array) $item;
+     if (isset($field) && isset($item[$field])) {
+diff --git a/modules/user/views_handler_field_user_roles.inc b/modules/user/views_handler_field_user_roles.inc
+index 592c10f..e1d583b 100644
+--- a/modules/user/views_handler_field_user_roles.inc
++++ b/modules/user/views_handler_field_user_roles.inc
+@@ -18,7 +18,7 @@ class views_handler_field_user_roles extends views_handler_field_prerender_list
+     $this->items = array();
+ 
+     foreach ($values as $result) {
+-      $uids[] = $this->get_value($result);
++      $uids[] = $this->get_value($result, NULL, TRUE);
+     }
+ 
+     if ($uids) {

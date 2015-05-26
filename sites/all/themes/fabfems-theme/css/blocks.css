@@ -1,0 +1,120 @@
+/**
+ * @file
+ * Block Styling
+ */
+
+.block /* Block wrapper */ {
+  margin-bottom: 1.5em;
+}
+h2.block-title {
+  font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+}
+
+/*
+ * By region
+ */
+
+/* Header */
+
+.region-header .block {
+  margin: 0;
+  text-align: right;
+}
+#block-nodeblock-5 {
+  left: 0px;
+  position: absolute;
+  top: 13px;
+}
+
+#block-system-user-menu {
+  margin-bottom: 23px;
+}
+#block-system-user-menu ul.menu {
+  font-size: 0px;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+#block-system-user-menu ul.menu li,
+#block-system-user-menu ul.menu li a {
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+#block-system-user-menu ul.menu li {
+  font-size: 12px;
+  line-height: 1.333em;
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 3px;
+  text-align: right;
+}
+#block-system-user-menu ul.menu li a {
+  background-color: #D9EDCF;
+  border-radius: 0 0 10px 10px;
+  color: #666;
+  padding: 3px 12px 5px;
+}
+
+#block-menu-block-1 h2.block-title,
+#block-menu-block-1 .content {
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+}
+#block-menu-block-1 h2.block-title {
+  font-size: 16px;
+  line-height: 1.25em;
+}
+#block-menu-block-1 ul.menu {
+  font-size: 0px;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+#block-menu-block-1 ul.menu li {
+  display: inline-block;
+  margin-left: 13px;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+#block-menu-block-1 ul.menu li a {
+  background: url("../images/bkgrndSocialMedia.png") no-repeat scroll 0 0 transparent;
+  display: block;
+  font-size: 0px;
+  height: 32px;
+  line-height: 0px;
+  overflow: hidden;
+  text-align: left;
+  text-indent: -1000px;
+  width: 32px;
+}
+#block-menu-block-1 ul.menu li.menu-mlid-596 a {
+  background-position: 100% 0;
+}
+
+/* Footer */
+.region-footer .block {
+  margin: 0 auto;
+  width: 602px;
+}
+
+/* Bottom */
+.region-bottom .block {
+  margin-bottom: 0.5em;
+}
+#block-system-main-menu ul.menu li {
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-right: 16px;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+#block-nodeblock-3 .content p {
+  margin: 0;
+}

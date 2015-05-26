@@ -1,0 +1,234 @@
+<?php
+
+/**
+ * @file
+ * Profile Tabs module.
+ *
+ * Provide an interface to arrange profile fieldgroups onto separate edit tabs.
+ *
+ */
+
+
+/**
+ * Implements hook_field_group_formatter_info().
+ */
+function profile_tabs_field_group_formatter_info() {
+
+  $settings = array(
+    'profile-tab' => array(
+      'label' => t('Profile tab'),
+      'description' => t('Profile tab - will be rendered as a separate form on a separate page.'),
+      'instance_settings' => array('path' => '', 'description' => ''),
+    )
+  );
+
+  return array(
+    'form' => $settings,
+    'display' => $settings,
+  );
+}
+
+/**
+ * Implements hook_field_group_format_settings().
+ * If the group has no format settings, default ones will be added.
+ * @params Object $group The group object.
+ * @return Array $form The form element for the format settings.
+ */
+function profile_tabs_field_group_format_settings($group) {
+  // Add a wrapper for extra settings.
+  $form = array(
+    'instance_settings' => array(
+      '#tree' => TRUE,
+      '#weight' => 2,
+    ),
+  );
+
+  $field_group_types = field_group_formatter_info();
+  $mode = $group->mode == 'form' ? 'form' : 'display';
+  $formatter = $field_group_types[$mode][$group->format_type];
+
+  if (isset($formatter['instance_settings']['path'])) {
+    $form['instance_settings']['path'] = array(
+      '#title' => t('Path'),
+      '#type' => 'textfield',
+      '#default_value' => isset($group->format_settings['instance_settings']['path']) ? $group->format_settings['instance_settings']['path'] : (isset($formatter['instance_settings']['path']) ? $formatter['instance_settings']['path'] : ''),
+      '#weight' => 3,
+      '#element_validate' => array('profile_tabs_validate_path'),
+      '#description' => t('The part of the path after user/*/.  If left empty, this fieldset will render at user/*/edit.'),
+    );
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_form_alter().
+ * The main event: strip the unwanted elements out of the various user-profile forms.
+ */
+function profile_tabs_form_alter(&$form, &$form_state, $form_id) {
+
+  // Only if we're on a user-profile form...
+  if (substr($form_id, 0, 12) == 'profile_tabs' || $form_id == 'user_profile_form') {
+    
+    // The path is everything after user/edit.
+    $groupid = substr($form_id, 13); // TODO: get the active group name in a smarter way.
+    
+    // Get a list of the groups we want to strip off this form, and their children.
+    $groups_to_strip = array();
+    foreach ($form['#fieldgroups'] as $groupname => $group) {
+      if ($group->format_type == 'profile-tab' && $group->group_name != $groupid) {
+        $groups_to_strip[] = $groupname;
+      }
+    }
+    // Get their child groups recursively.
+    _profile_tabs_recurse_children($groups_to_strip, $form['#group_children']);
+    
+    // Strip them.
+    foreach ($form['#group_children'] as $child => $parent) {
+      if (in_array($parent, $groups_to_strip)) {
+        $form[$child]['#access'] = FALSE;
+        unset($form['#groups'][$parent]);
+        unset($form['#fieldgroups'][$parent]);
+      }
+    }
+    
+    // And strip a bunch of other stuff that isn't really fields.
+    $form['picture']['#access'] = FALSE;
+    $form['contact']['#access'] = FALSE;
+    $form['masquerade']['#access'] = FALSE;
+    $form['metatags']['#access'] = FALSE;
+    $form['domain_user']['#access'] = FALSE;
+    $form['redirect']['#access'] = FALSE;
+    $form['revision_information']['#access'] = FALSE;
+    
+    // Add add the fieldgroup description, if any.
+    if (isset($form['#fieldgroups'][$groupid]->format_settings['instance_settings']['description'])) {
+      $form['profile_tab_description'] = array(
+        '#prefix' => '<div class="description">',
+        '#suffix' => '</div>',
+        '#type' => 'markup',
+        '#markup' => $form['#fieldgroups'][$groupid]->format_settings['instance_settings']['description'],
+        '#weight' => -99,
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_forms().
+ */
+function profile_tabs_forms() {
+  // Let our forms share the same callback as "Edit account", so
+  // it displays the same data by default but we can alter them separately in
+  // hook_form_FORM_ID_alter().
+  $groups = profile_tabs_get_all_tabs();
+  foreach ($groups as $groupname => $group) {
+    $forms['profile_tabs_' . $groupname] = array(
+      'callback' => 'user_profile_form',
+    );
+  }
+  return $forms;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function profile_tabs_menu() {
+
+  // Get all the profile tab paths.
+  $groups = profile_tabs_get_all_tabs();
+  foreach ($groups as $groupname => $group) {
+  
+    // If the group has a "path" value, create a menu item for it.
+    if ($path = $group->format_settings['instance_settings']['path']) {
+      $items['user/%user/' . $path] = array(
+        'title' => $group->format_settings['label'],
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('profile_tabs_' . $groupname, 1), // Pass in the form ID and the uid.
+        'access callback' => 'profile_tabs_user_edit_access',
+        'access arguments' => array(1),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => $group->weight, // TODO: fix the weight.
+        // In hook_forms() we redirect this menu item's form callback to
+        // user_profile_form() instead, so we need to load its file.
+        'file path' => drupal_get_path('module', 'user'),
+        'file' => 'user.pages.inc',
+      );
+    }
+  }
+
+  return $items;
+}
+
+
+/**
+ * Access callback for the profile tabs.
+ */
+function profile_tabs_user_edit_access($account) {
+  global $user;
+  
+  if ($user->uid == $account->uid || user_access('administer role model profiles')) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Validation callback for the profile tabs configuration form.
+ */
+function profile_tabs_validate_path($element, &$form_state) {
+
+  $path = $form_state['values']['fields'][$form_state['formatter_settings_edit']]['format_settings']['settings']['instance_settings']['path'];
+
+  // If a path is entered, make sure it's valid.
+  if ($path) {
+    // Make sure the path entered (if any) is usable.
+    if ($path && !preg_match('!^[A-Za-z0-9-_ ]+$!', $path)) {
+      form_error($element, t('The path must include only letters, numbers, underscores and dashes.'));
+    }
+    
+  } else {
+    // If path is left blank, default it to "edit" so this fieldset will render at user/%/edit.
+    $path = 'edit';
+  }
+  
+  // Check if there is an existing profile tab fieldgroup with that path.
+  $groups = profile_tabs_get_all_tabs();
+  foreach ($groups as $groupname => $group) {
+    if ($groupname != $form_state['formatter_settings_edit'] && $group->format_settings['instance_settings']['path'] == $path) {
+      form_error($element, t('That path is already in use by the profile-tab fieldgroup "' . $group->label . '".'));
+    }
+  }
+  
+  // Push any changes we've made to the path back into the form_state to be saved.
+  $form_state['values']['fields'][$form_state['formatter_settings_edit']]['format_settings']['settings']['instance_settings']['path'] = $path;
+  return TRUE;
+}
+
+/**
+ * Utility function: load all the profile tab fieldgroups in the site.
+ */
+function profile_tabs_get_all_tabs() {
+  // Get all the user-form fieldgroups
+  $groups = field_group_info_groups('user', 'user', 'form');
+  // Get the ones that are configured to be profile tabs
+  foreach ($groups as $groupname => $group) {
+    if ($group->format_type != 'profile-tab') {
+      unset($groups[$groupname]);
+    }
+  }
+  return $groups;
+}
+
+/**
+ * Utility function: load all the profile tab fieldgroups in the site.
+ */
+function _profile_tabs_recurse_children(&$the_family, &$tree) {
+  foreach ($tree as $child => $parent) {
+    if (in_array($parent, $the_family) && strstr($child, 'group')) {
+      $the_family[] = $child;
+      unset($tree[$child]);
+       _profile_tabs_recurse_children($the_family, $tree);
+    }
+  }
+}

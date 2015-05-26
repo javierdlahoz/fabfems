@@ -1,0 +1,6 @@
+name = AB BeautyTips
+description = Display the field's description in a JavaScript tooltip box.
+core = 7.x
+package = Fields
+dependencies[] = field
+dependencies[] = beautytips

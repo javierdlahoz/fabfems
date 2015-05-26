@@ -1,0 +1,16 @@
+<?php
+
+function ab_beautytips_preprocess_page(&$vars) {
+  drupal_add_css(drupal_get_path('module', 'ab_beautytips') . '/ab_beautytips.css');
+  drupal_add_js(drupal_get_path('module', 'ab_beautytips') . '/ab_beautytips.js');
+  
+  // Create custom BeautyTips
+  $options = array();
+  $options['ab_beautytips'] = array(
+    'cssSelect' => '.ab-beautytips-trigger',
+    'contentSelector' => '$(this).parent().siblings(".description").html()',
+    'trigger' => array('mouseover', 'click'),
+    'width' => 350,
+  );
+  beautytips_add_beautytips($options);
+}

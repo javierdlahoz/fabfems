@@ -1,0 +1,4 @@
+name = Profile Tabs
+description = Profile fieldgroups as separate tabs
+package = "Other"
+core = 7.x

@@ -1,0 +1,29 @@
+
+/* Form Item Description Tooltip */
+.form-item .form-item-description-tooltip {
+  background: url('../images/bkgrndFormItemTooltipWrapper.png') repeat-y scroll 0 0 transparent;
+  font-size: 11px;
+  line-height: 1.4em;
+  position: relative;
+  z-index: 10000;
+  width: auto !important;
+}
+.form-item-description-tooltip .tooltip-wrapper {
+  background: url('../images/bkgrndFormItemTooltipInner.png') no-repeat scroll 0 50% transparent;
+  padding-left: 11px;
+}
+
+.form-item .tooltip-trigger-wrapper {
+  margin: 0 3px;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+
+.form-item-description-tooltip .tooltip-inner {
+  background: url('../images/bkgrndFormItemTooltipRepeat.png') repeat scroll 0 0 transparent;
+  color: #FFF;
+  padding: 20px 15px;
+  width: 180px;
+  white-space: normal;
+}

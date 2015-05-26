@@ -1,0 +1,195 @@
+/**
+ * @file
+ * Views Styling
+ */
+
+/*
+ * Generic
+ */
+.view .item-list ul {
+  margin: 0;
+  padding: 0;
+}
+.view .item-list li {
+  list-style-image: none;
+  list-style-type: none;
+}
+table.views-view-grid {
+  width: 100%;
+}
+table.views-view-grid.cols-5 td {
+  width: 20%;
+}
+
+/*
+ * Specific
+ */
+
+/* Partners block */
+#block-views-partners-block {
+  background-color: #FFF;
+  border: 1px solid #EFDAF5;
+  padding: 20px 274px 14px 22px;
+}
+#block-views-partners-block h2.block-title {
+  border-bottom: 1px solid #E4DAE9;
+  margin-bottom: 12px;
+}
+
+/* Featured partners block */
+.views-block-featured-partners {
+  position: relative;
+}
+.views-block-featured-partners .view-header {
+  left: 605px;
+  position: absolute;
+  top: -74px;
+}
+.views-block-featured-partners .views-row {
+  display: inline-block;
+  list-style-image: none;
+  list-style-type: none;
+  margin-right: 30px;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+.views-block-featured-partners .views-row-last {
+  margin-right: 0;
+}
+
+/* Slideshow */
+#block-views-slideshow-block-1 {
+  margin-bottom: 1em;
+}
+#views_slideshow_cycle_teaser_section_slideshow-block_1 {
+  background: url("../images/bkgrndSlideshowShadow.png") no-repeat scroll 50% 100% transparent;
+  height: 427px;
+  padding-bottom: 20px;
+}
+#views_slideshow_cycle_teaser_section_slideshow-block_1 .views-field-php {
+  height: 427px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  width: 900px;
+}
+#views_slideshow_cycle_teaser_section_slideshow-block_1 .views-field-php li {
+  font-size: 20px;
+  line-height: 1.2em;
+}
+#views_slideshow_cycle_teaser_section_slideshow-block_1 .views-field-php .last {
+  margin-top: 16px;
+}
+#views_slideshow_cycle_teaser_section_slideshow-block_1 .views-field-php a {
+  background: url("../images/arrowRightPink.png") no-repeat scroll 96% 50% #D9EDCF;
+  border: 1px solid #AFC1A8;
+  border-radius: 8px 8px;
+  color: #444;
+  display: inline-block;
+  font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+  padding: 6px 30px 5px 8px;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+#views_slideshow_cycle_teaser_section_slideshow-block_1 .views-field-php a:hover {
+  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: #FFF;
+  color: #FFF;
+}
+#views_slideshow_cycle_teaser_section_slideshow-block_1 .views-field-php .last a {
+  background-color: #D2ABDA;
+  border-color: #92699A;
+}
+#views_slideshow_cycle_teaser_section_slideshow-block_1 .views-field-php .last a:hover {
+  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: #FFF;
+  color: #FFF;
+}
+
+/* Find a role model */
+.view-id-mentors .views-row {
+  border-bottom: 1px solid #DDD5E1;
+  border-bottom-color: rgba(186, 171, 195, 0.5);
+  margin-bottom: 1em;
+  min-height: 109px;
+  padding-bottom: 1em;
+  zoom: 1;
+}
+.view-id-mentors .views-row:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0px;
+  visibility: hidden;
+}
+.view-id-mentors .views-field {
+}
+.view-id-mentors .views-label {
+  color: #9776A4;
+}
+.view-id-mentors .views-field-field-image {
+  float: left;
+  margin-right: 24px;
+  margin-bottom: 6px;
+}
+.view-id-mentors .views-field-field-image a {
+  background-color: #FFF;
+  border: 1px solid #826D8F;
+  display: block;
+  height: 97px;
+  padding: 2px;
+  width: 86px;
+}
+.view-id-mentors .views-field-php h2 {
+  margin: 0;
+}
+.view-id-mentors .views-field-field-additional-resources {
+  float: right;
+  font-size: 13px;
+  width: 240px;
+}
+.view-id-mentors .views-field-field-of-work,
+.view-id-mentors .views-field-field-ethnicity,
+.view-id-mentors .views-field-field-participation-level {
+  font-size: 13px;
+  padding-right: 20px;
+/*   width: 330px; */
+  width: 200px;
+  margin-left: 116px;
+}
+.view-id-mentors .views-field-php {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#block-views-exp-mentors-page {
+  background-color: #FFF;
+  border: 1px solid #D3D2E1;
+  padding: 10px;
+}
+
+/* Gallery */
+.view-id-gallery .views-view-grid td {
+  padding: 0 15px 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+.view-id-gallery .views-field-field-gallery-images a {
+  background-color: #FFF;
+  border: 1px solid #B26DBF;
+  display: inline-block;
+  line-height: 0px;
+  opacity: 0.75;
+  zoom: 1;
+  *display: inline;
+}
+.view-id-gallery .views-field-field-gallery-images a:hover,
+.view-id-gallery .views-field-field-gallery-images a:focus,
+.view-id-gallery .views-field-field-gallery-images a:active {
+  opacity: 1;
+}

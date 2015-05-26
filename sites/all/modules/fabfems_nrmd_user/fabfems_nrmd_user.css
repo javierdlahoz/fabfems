@@ -1,0 +1,49 @@
+/* Admin view: Manage Role Models listing */
+input#edit-uid-1 { width: 200px; }
+
+
+/* PDM status messages from Persistant Dismissable Messages module.  Some of these
+ * styles are shared with the instruction nodeblocks on the registration forms. */
+div.messages {
+  background-image: none;
+}
+div.pdm-message-wrapper,
+body.section-registration div.region-content div.block-nodeblock,
+form#user-pass-reset p,
+body.first-login-reset-password form#profile-tabs-group-account-settings p {
+  background-position: 8px 8px;
+  background-repeat: no-repeat;
+  border: 1px solid;
+  margin: 6px 0;
+  padding: 10px 10px 10px 40px;
+}
+div.pdm-status,
+body.section-registration div.region-content div.block-nodeblock,
+form#user-pass-reset p,
+body.first-login-reset-password form#profile-tabs-group-account-settings p {
+  background-image: url(../../../../../../misc/message-24-ok.png);
+  border: 1px solid #be7;
+  color: #234600;
+  background-color: #f8fff0;
+}
+div.pdm-warning {
+  background-image: url(../../../../../../misc/message-24-warning.png);
+  border: 1px solid #ed5;
+  color: #840;
+  background-color: #fffce5;
+}
+div.pdm-error {
+  background-image: url(../../../../../../misc/message-24-error.png);
+  border: 1px solid #ed541d;
+  color: #8c2e0b;
+  background-color: #fef5f1;
+}
+div.pdm-dismiss-wrapper {
+  float: right;
+  margin-left: 10px;
+}
+
+body.section-registration div.region-content div.block-nodeblock { margin-top: 20px; }
+body.section-registration div.region-content div.block-nodeblock p,
+form#user-pass-reset p { margin: 0; }
+body.section-registration div.pdm-dismiss-wrapper { display: none; }

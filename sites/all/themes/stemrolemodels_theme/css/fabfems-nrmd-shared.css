@@ -1,0 +1,669 @@
+/*
+ * Generic
+ */
+a.read-more,
+a.read-more:link,
+a.read-more:visited {
+  font-weight: bold;
+}
+div.grippie {
+  display: none;
+  height: 0px;
+}
+.item-list .pager {
+  text-align: left;
+}
+#page-title {
+  margin-bottom: 14px;
+}
+
+/*
+ * User profile
+ */
+.profile .field-label-above {
+  border-top: 1px solid;
+  font-size: 0px;
+  padding-bottom: 4px;
+  padding-top: 5px;
+  width: 590px;
+}
+
+.profile .field-name-field-participation-level {
+  margin-top: 40px;
+}
+
+.profile .field-label-above .field-label,
+.profile .field-label-above .field-items {
+  display: inline-block;
+  font-size: 14px;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+.profile .field-label-above .field-label {
+  font-weight: normal;
+  text-align: right;
+  width: 145px;
+}
+.profile .field-label-above .field-items {
+  padding-left: 20px;
+  width: 425px;
+}
+.profile .field-label-above .field-items p {
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
+.profile .field-name-field-company .field-items,
+.profile .field-name-field-availability .field-items,
+.profile .field-name-field-affiliation .field-items,
+.profile .field-name-field-university .field-items,
+.profile .field-name-field-of-work .field-items {
+  font-weight: bold;
+}
+.profile .field-name-field-degree,
+.profile .field-name-field-job-title,
+.profile .field-name-field-of-work-other {
+  border-top: 0 none;
+  padding-top: 0;
+	margin-top: -4px;
+}
+.profile .field-name-field-degree .field-label,
+.profile .field-name-field-job-title .field-label {
+  visibility: hidden;
+}
+
+.profile .field-name-field-address {
+  font-size: 18px;
+  line-height: 1.1667em;
+  position: relative;
+  top: -8px;
+}
+
+.profile .field-name-field-of-work {
+  padding-top: 13px;
+}
+
+.profile .masquerade-switch {
+  text-align: right;
+}
+
+.profile .field-name-field-image {
+  float: right;
+  margin: -88px 0 0;
+}
+.profile .field-name-field-image img {
+  border: 1px solid;
+  padding: 2px;
+}
+.page-user #page-title {
+  font-size: 2.1429em;
+  line-height: 1.1667em;
+}
+#profile-status,
+.field-name-field-role-model-status { margin: 0 0 10px 0; }
+#profile-status #label { font-weight: bold; }
+.page-user div.messages { position: relative; top: -5px; }
+
+/*
+ * Front page
+ */
+.front #main-wrapper {
+  background-color: transparent;
+}
+.front #main {
+  background-image: none;
+  padding-bottom: 0;
+}
+.front #content .section {
+  margin-left: 0;
+  margin-right: 0;
+}
+.front h1.title {
+  display: none;
+}
+.front .region-content {
+  zoom: 1;
+}
+.front .region-content:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0px;
+  visibility: hidden;
+}
+.front .region-content .block {
+  margin-bottom: 0;
+}
+body.front div.region-content div.block-nodeblock {
+  float: left;
+  margin-right: 20px;
+}
+body.front div.region-content div.block-nodeblock .node p {
+  margin: 0;
+  padding-top: 4px;
+}
+body.front #block-system-main h2 {
+  font: bold 214.29%/1.1667em "Arial Rounded MT Bold", Arial, sans-serif !important;
+  margin: 0 !important;
+}
+.front #block-system-main p {
+  margin: 0.5em 0;
+}
+
+
+/*
+ * Registration Form
+ */
+body.page-user div.block-nodeblock { margin-bottom: 0; }
+
+/* Post-registration change password step */
+/* If we have just come to the user account form via a one-time login link, theme out unnecessary elements. */
+body.first-login-reset-password div.tabs, 
+body.first-login-reset-password div.region-content div.block-nodeblock,
+body.first-login-reset-password div.form-item-name, 
+body.first-login-reset-password div.form-item-mail, 
+body.first-login-reset-password div.form-item-pass div.description,
+body.first-login-reset-password div.field-name-field-newsletter {
+  display: none !important;
+}
+
+/*
+ * Find a Role Model view
+ */
+div#block-fabfems-nrmd-user-role-models-view-admin-link {
+  float: right;
+  position: relative;
+  top: -63px;
+}
+div#block-fabfems-nrmd-user-role-models-view-admin-link a.admin-link {
+  background: none repeat-x scroll 0 0;
+  border: 1px solid;
+  border-radius: 9px 9px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  height: 31px;
+  line-height: 32px;
+  padding: 1px 8px;
+  text-align: center;
+}
+#block-views-exp-mentors-page .views-exposed-widget .form-text {
+  width: 200px;
+}
+#block-views-exp-mentors-page .views-widget-filter-field_interests_tid {
+  z-index: 20;
+}
+#block-views-exp-mentors-page .views-widget-filter-field_address_administrative_area {
+  z-index: 19;
+}
+#block-views-exp-mentors-page .views-widget-filter-field_ethnicity_value {
+  z-index: 18;
+}
+#block-views-exp-mentors-page .views-widget-filter-field_gender_value {
+  z-index: 17;
+}
+#block-views-exp-mentors-page .views-widget-filter-field_age_range_tid {
+  z-index: 16;
+}
+#block-views-exp-mentors-page .views-widget-filter-field_of_work_tid_1 {
+  z-index: 15;
+}
+#block-views-exp-mentors-page .views-widget-filter-field_participation_level_tid {
+  z-index: 14;
+}
+
+/*
+ * Partners view
+ */
+.views-page-partners .views-row {
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  zoom: 1;
+}
+.views-page-partners .views-row:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0px;
+  visibility: hidden;
+}
+.views-page-partners .views-field-field-image,
+.views-page-partners .views-field-title {
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+}
+.views-page-partners .views-field-field-image {
+  text-align: center;
+  width: 200px;
+}
+.views-page-partners .views-field-field-image a {
+  border: 1px solid;
+  display: inline-block;
+  height: 60px;
+  margin-right: 20px;
+  padding: 2px;
+  width: 150px;
+  zoom: 1;
+  *display: inline;
+}
+.views-page-partners .views-field-title {
+}
+
+/*
+ * Partner node
+ */
+.node-partner .field-name-field-image {
+  float: right;
+  margin: 0 0 20px 20px;
+}
+.node-partner .field-name-field-image img {
+  border: 1px solid;
+  padding: 2px;
+}
+
+/*
+ * Multimedia gallery
+ */
+a.multimedia-gallery {
+  position: relative; /* necessary for positioning the video overlay */
+  display: inline-block;
+  line-height: 0;
+}
+span.video-overlay {
+  background: url(../images/video-thumbnail-overlay.png) no-repeat 0% 0% transparent; 
+  height: 40px; 
+  width: 40px; 
+  display: block; 
+  position: absolute; 
+  top: 5px; left: 15px;
+}
+
+/*
+ * User sidebar block (multimedia gallery and links)
+ */
+#block-fabfems-nrmd-user-user-sidebar {
+  margin-top: -61px;
+}
+body.page-user-gallery #block-fabfems-nrmd-user-user-sidebar {
+  margin-top: 0;
+}
+#block-fabfems-nrmd-user-user-sidebar .content .item-list ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  list-style-type: none;
+}
+#block-fabfems-nrmd-user-user-sidebar .content .item-list li {
+  margin-bottom: 10px;
+}
+#block-fabfems-nrmd-user-user-sidebar .content .item-list a {
+  background: url("../images/arrowRightPink.png") no-repeat scroll 96% 50%;
+  border: 1px solid;
+  border-radius: 8px 8px;
+  display: block;
+  font-size: 16px;
+  line-height: 1.25em;
+  padding: 8px 30px 7px 8px;
+}
+#block-fabfems-nrmd-user-user-sidebar .multimedia-gallery-wrap {
+  margin: 0;
+}
+
+#block-fabfems-nrmd-user-user-sidebar .multimedia-gallery-wrap a {
+  border: 1px solid;
+  margin: 0 8px 10px 0;
+  padding: 0;
+}
+#block-fabfems-nrmd-user-user-sidebar .multimedia-gallery-wrap a.col-2 {
+  margin-right: 0;
+}
+
+#block-fabfems-nrmd-user-user-sidebar .multimedia-gallery-wrap a.invisible {
+  display: none;
+}
+
+#block-fabfems-nrmd-user-user-sidebar .multimedia-gallery-wrap img {
+  border: 0 none;
+  margin: 0;
+  padding: 0;
+}
+#block-fabfems-nrmd-user-user-sidebar .multimedia-gallery-wrap a.row--1.col--1 {
+  border: none;
+  margin-bottom: 0;
+}
+#block-fabfems-nrmd-user-user-sidebar .multimedia-gallery-wrap a.row--1.col--1 img {
+  border: 1px solid;
+  padding: 2px;
+  line-height: 0px;
+  margin-bottom: 5px;
+}
+
+/* User profile multimedia gallery page */
+#block-system-main a.multimedia-gallery {
+  margin: 0 10px 10px 0;
+	border: 1px solid #CCC;
+}
+#block-system-main a.multimedia-gallery span.video-overlay {
+	top: 70px;
+	left: 70px;
+}
+
+/*
+ * Section headers
+ */
+body.page-user div.block-nodeblock, /* Tighten up margins around header blocks on user pages */
+body.page-user div.block-nodeblock p { margin-bottom: 0; }
+
+#node-22 .field-item,
+#block-fabfems-nrmd-user-user-registration-steps {
+  padding-top: 39px;
+}
+#node-22 .field-item h2,
+#block-fabfems-nrmd-user-user-registration-steps h2 {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 18px;
+  height: 1.1667em;
+  line-height: 1.1667em;
+  margin: 0;
+  padding: 4px 20px 5px;
+}
+#block-fabfems-nrmd-user-user-registration-steps {
+  text-align: right;
+}
+#block-fabfems-nrmd-user-user-registration-steps h2 {
+  padding-right: 195px;
+}
+#block-fabfems-nrmd-user-user-registration-steps ul {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 30px;
+}
+#block-fabfems-nrmd-user-user-registration-steps ul li.step {
+  background: url("../images/bkgrndRegistrationSteps.png") no-repeat scroll 0 0 transparent;
+  display: inline-block;
+  font-size: 24px;
+  height: 24px;
+  line-height: 1em;
+  list-style-image: none;
+  list-style-type: none;
+  margin-right: 12px;
+  padding: 12px;
+  text-align: center;
+  vertical-align: top;
+  width: 24px;
+  zoom: 1;
+  *display: inline;
+}
+#block-fabfems-nrmd-user-user-registration-steps ul li.current-step {
+  background-position: 0 100%;
+}
+
+/*
+ * Overrides
+ */
+
+/* Main menu */
+.logged-in #block-system-main-menu .menu-mlid-598 {
+  display: none;
+}
+
+/* User contact form */
+.page-user .contact-form #edit-to label,
+.page-user .contact-form #edit-to a {
+  display: inline-block;
+  margin-right: 3px;
+  zoom: 1;
+  *display: inline;
+}
+.page-user .contact-form #edit-to a {
+  font-weight: bold;
+  text-shadow: 1px 1px 0;
+}
+
+
+/* 
+ * User/profile edit forms
+ */
+
+#user-profile-form .form-wrapper {
+  border: none !important;
+}
+
+#user-profile-form #edit-metatags,
+#user-profile-form #edit-overlay-control {
+  display: none;
+}
+
+/* Accordion fieldsets on profile form */
+div.ui-accordion .ui-accordion-content {
+/* Note: if overflow is hidden the Tooltip that display the
+         field's description can be cut off if they reach
+         the edge of this window
+*/
+  overflow: auto;
+}
+div.ui-accordion .ui-accordion-content.group-personal {
+  overflow: visible;
+}
+div.field-group-accordion-wrapper {
+  margin-bottom: 20px;
+}
+.ui-accordion .ui-accordion-header .ui-icon { left: 0.2em; }
+form .ui-accordion h3, form .ui-accordion h3.ui-state-active {
+  padding: 3px 1.3em;
+  margin-top: 5px !important;
+} 
+
+div.field-group-accordion-item {
+  margin-bottom: 5px !important;
+}
+
+/* User account form: password etc. */
+#user-profile-form .form-type-password {
+  width: 600px;
+}
+#user-profile-form .form-type-password::after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0px;
+  visibility: hidden;
+  zoom: 1;
+}
+#user-profile-form .form-wrapper .fieldset-legend {
+  display: none;
+}
+
+#user-profile-form .form-type-password .password-strength,
+#user-profile-form .form-type-password .password-confirm {
+  margin-top: 0;
+}
+#user-profile-form .form-type-password div.password-confirm {
+  float: right;
+}
+#user-profile-form .form-type-password .password-confirm {
+  clear: left;
+  float: left;
+}
+#user-profile-form .form-type-password-confirm .form-type-password label {
+  float: left;
+}
+
+#user-profile-form .form-type-password .password-field {
+  float: left;
+  clear: left;
+}
+
+#user-profile-form .form-type-password-confirm .description,
+#user-profile-form .password-suggestions {
+  clear: both;
+}
+
+#user-profile-form #edit-contact,
+#user-profile-form #edit-contact .form-item-contact {
+  margin: 0;
+}
+
+div.form-item-field-newsletter-und div.description {
+  margin-left: 0;
+}
+
+/* Profile form: Name, Year of Birth, Address */
+div.group_personal_horizontal {
+    width: 100%; 
+    float: left; 
+    clear: both; 
+    margin-bottom: 15px;
+}
+div.group_personal_horizontal div.form-wrapper { float: left; }
+div.group_personal_horizontal div.form-wrapper div.form-item { margin-top: 0; }
+div#edit-field-dob,
+div#edit-field-gender {
+  width: 24%;
+}
+div#edit-field-ethnicity {
+  width: 50%;
+}
+div#edit-field-dob input { width: 100px; }
+div#edit-field-ethnicity select { width: 200px; }
+
+div#edit-field-address { clear: both; margin-bottom: 15px; }
+
+div#edit-field-first-name,
+div#edit-field-last-name,
+div#edit-field-phone {
+  float: left;
+  margin-right: 20px;
+}
+
+div#edit-field-dob fieldset,
+div#edit-field-address fieldset,
+div#edit-field-dob fieldset div {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+div#edit-field-dob fieldset legend,
+div#edit-field-address fieldset legend {
+  font-style:italic;
+  font-weight:normal;
+  padding-left:3px;
+}
+div#edit-field-dob fieldset div.form-item input {
+  with: 100px !important;
+}
+div#edit-field-address fieldset div.fieldset-wrapper div.form-item {
+  margin: 0;
+  padding: 5px 0;
+  width: 40%;
+  height: 50px;
+  float: left;
+}
+div#edit-field-address fieldset div.fieldset-wrapper div.form-item label {
+  font-size:0.9em;
+  line-height:1.5em;
+  font-style: normal;
+}
+div.form-item-field-address-und-0-country {
+  display: none !important;
+}
+
+/* Profile form: Field of Work */
+div#edit-field-of-work,
+div#edit-field-of-work-other {
+  float: left;
+  margin-right: 20px;
+}
+div#edit-field-of-work div.form-item,
+div#edit-field-of-work-other div.form-item { margin-top: 0; }
+
+/* Profile form: Role Model info */
+div.group_mentoring { width: 92%; float: left; }
+div.group_mentoring_right { width: 55%; float: right; }
+div.group_mentoring_left { width: 40%; float: left; }
+select#edit-field-affiliation-und { width: 300px; }
+
+/* Profile form: Labels on taxo fields */
+.form-type-checkboxes label {
+  font-style:italic;
+  padding-left:3px;
+}
+.form-type-radio label.option,
+.form-type-checkboxes label.option {
+  font-style:normal;
+  font-size: 0.9em;
+  padding-left:0;
+}
+
+/* Multimedia Gallery form */
+div#edit-field-multimedia-gallery .field-label {
+  display: none;
+}
+
+/* Approval form */
+div#edit-field-role-model-status-log {
+  clear: both;
+}
+div#edit-field-role-model-status-changed {
+  display: none;
+}
+div.view-role-model-approval-history table {
+  width: 100%;
+}
+div.view-role-model-approval-history p,
+div.view-role-model-approval-history table {
+  margin: 0 0 10px 0;
+}
+div.view-role-model-approval-history table th,
+div.view-role-model-approval-history table td {
+  padding: 2px 10px 2px 5px;
+}
+
+/* Submit buttons on user profile forms */
+#edit-submit-for-moderation,
+body.page-user #edit-cancel {
+  float: right;
+}
+
+/* Cancal user account confirmation form */
+form#user-cancel-confirm-form div.form-actions a#edit-cancel {
+  background: none repeat-x scroll 0 0 #D9EDCF;
+  border: 1px solid #AFC1A8;
+  border-radius: 9px 9px;
+  color: #444;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  height: 31px;
+  line-height: 33px;
+  padding: 1px 8px;
+  text-align: center;
+}
+
+/* ajax reference lookup throbber */
+#user-profile-form input.form-autocomplete {
+  background-position: 100% 14px;
+}
+#user-profile-form input.form-autocomplete.throbbing {
+  background-position: 100% -14px;
+}
+
+#user-profile-form .form-textarea {
+  resize: none;
+}
+#user-profile-form #field-biography-add-more-wrapper .filter-wrapper {
+  display: none;
+}
+
+#views-exposed-form-mentors-page select {
+  width: 205px;
+}
+
+#views-exposed-form-mentors-page .form-submit {
+  margin-right: 10px;
+}
